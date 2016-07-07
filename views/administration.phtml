@@ -1,0 +1,17 @@
+<p>Vítejte v administraci, jste přihlášeni jako <?= $name ?></p>
+<?php if (!$admin) : ?>
+    <p>Nemáte administrátorská oprávnění, požádejte administrátora webu, aby vám je přidělil.</p>
+<?php endif ?>
+<h2><a href="editorTask">Nový úkol</a></h2>
+<h2><a href="editorWiki">Nová wiki</a></h2>
+<h2><a href="article">Seznam úkolů</a></h2>
+<h2><a href="wiki">Wiki</a></h2>
+
+<?php if ($admin) : ?>
+    <h2> <a href="registration">Registrace nového uživatele</a></h2>
+    <h2> <a href="#">Změna hesla</a></h2>
+    <h2> <a href="#">Smazat uživatele</a></h2>
+<?php endif ?>
+
+<h2><a href="administration/logout">Odhlásit</a></h2>
+

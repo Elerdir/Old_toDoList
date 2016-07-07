@@ -1,0 +1,13 @@
+<h1>Přihlášení do administrace</h1>
+
+<form method="post">
+    Jméno<br />
+    <input type="text" name="name" /><br />
+    Heslo<br />
+    <input type="password" name="password" /><br />
+    <input type="submit" value="Přihlásit" />
+</form>
+
+<?php if ($admin) : ?>
+<p> <a href="registration">Registrace nového uživatele</a></p>
+<?php endif ?>

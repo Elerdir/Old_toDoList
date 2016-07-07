@@ -1,0 +1,48 @@
+<h1>Wiki</h1>
+
+<table>
+    <?php foreach ($articles as $article) : ?>
+        <tr>
+            <td>
+
+                <?php if ($article['category_id'] == 1) : ?>
+
+                    <?php
+                    $articlesManager = new ArticlesManager();
+                    
+                    $allUsers = $articlesManager->returnUsers();
+                    $nameAssignee = "";
+                    foreach ($allUsers as $usr)
+                    {
+                        if ($article['assignee_id'] == $usr['users_id'])
+                        {
+                            $nameAssignee = $usr['name'];
+                        }
+                    }
+                    ?>
+
+                    <h2><a href="wiki/<?= $article['url'] ?>">
+                            <?= $article['title'] ?>
+                            <?php
+                            if ($nameAssignee)
+                            {
+                                echo("(Přiřazený:  $nameAssignee )");
+                            }
+                            ?>
+
+                        </a>
+                    </h2>
+
+                    <?= $article['description'] ?>
+                    <?php if ($admin) : ?>
+                        <br />
+                        <a href="editorWiki/<?= $article['url'] ?>">Editovat</a>
+                        <a href="wiki/<?= $article['url'] ?>/remove" onclick="return(confirm('Smazat?'));">Odstranit</a>
+                    <?php endif ?>
+                    
+                <?php endif ?>
+
+            </td>
+        </tr>
+    <?php endforeach ?>
+</table>

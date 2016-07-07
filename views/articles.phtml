@@ -1,0 +1,45 @@
+<h1>Seznam úkolů</h1>
+<table class="width">
+    <?php foreach ($articles as $article) : ?>
+        <tr>
+            <td>
+
+                <?php if ($article['category_id'] == 2) : ?>
+
+                    <?php
+                    $articlesManager = new ArticlesManager();
+                    $allUsers = $articlesManager->returnUsers();
+                    $nameAssignee = "";
+                    foreach ($allUsers as $usr)
+                    {
+                        if ($article['assignee_id'] == $usr['users_id'])
+                        {
+                            $nameAssignee = $usr['name'];
+                        }
+                    }
+                    ?>
+
+                    <h2><a href="article/<?= $article['url'] ?>">
+                            <?= $article['title'] ?>
+                            <?php
+                            if ($nameAssignee)
+                            {
+                                echo("(Přiřazený:  $nameAssignee )");
+                            }
+                            ?>
+
+                        </a>
+                    </h2>
+                    
+                    <?= $article['description'] ?>
+                    <?php if ($admin) : ?>
+                        <br />
+                        <a href="editorTask/<?= $article['url'] ?>">Editovat</a>
+                        <a href="article/<?= $article['url'] ?>/remove" onclick="return(confirm('Smazat?'));">Odstranit</a>
+                    <?php endif ?>
+                <?php endif ?>
+
+            </td>
+        </tr>
+    <?php endforeach ?>
+</table>

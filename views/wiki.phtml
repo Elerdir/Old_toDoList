@@ -1,0 +1,11 @@
+<header>
+    <h1><?= $title ?></h1>
+    <br>
+</header>
+<section>
+    <?= $_content ?>
+    <?php if ($admin) : ?>
+        <br>
+        <a href="editorWiki/<?= $url ?>">Editovat</a>
+    <?php endif ?>
+</section>

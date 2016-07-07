@@ -1,0 +1,93 @@
+<h1>Nový úkol</h1>
+<div class="container-fluid">
+<div class="row">
+<form method="post">
+    <input type="hidden" name="articles_id" value="<?= $article['articles_id'] ?>" />
+    <input type="hidden" name="category_id" value="<?= $article['category_id'] ?>" />
+    <input type="hidden" name="create_date" value="<?= $article['create_date'] ?>" />
+    <input type="hidden" name="user_id" value="<?= $article['user_id'] ?>" />
+    <input type="hidden" name="url" value="<?= $article['url'] ?>" />
+<div class="col-md-4">
+<table>
+    <tr>
+        <td>
+            <input type="text" name="title" placeholder="Titulek" size="15" value="<?= $article['title'] ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" name="description" placeholder="Popis" value="<?= $article['description'] ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" name="keywords" placeholder="Klíčová slova" value="<?= $article['keywords'] ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Priorita:
+            <select name="priority_id">
+                <?php foreach ($allPriorities as $priority) : ?>
+                    <option value="<?= $priority['priority_id'] ?>" <?=$priority['priority_id'] == $article['priority_id'] ? ' selected="selected"' : '';?>><?= $priority['name'] ?>
+                <?php endforeach ?>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--<br />-->
+            <script type="text/javascript">datedit("end_date","d.m.yyyy");</script>
+            <input type="date" id="end_date" name="end_date" placeholder="Datum ukončení" value="<?= DateUtils::formatDate($article['end_date']) ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Přiřazení:
+            <select name="assignee_id">
+                <option value="">
+                <?php foreach ($allUsers as $usr) : ?>
+                <option value="<?= $usr['assignee_id'] ?>" <?=$usr['assignee_id'] == $article['assignee_id'] ? ' selected="selected"' : '';?>><?= $usr['name'] ?>
+
+                <?php endforeach ?>
+            </select>
+        </td>
+    </tr>
+</table>
+<!--<input type="submit" value="Vytvořit úkol" />-->
+    <?php if ($article['articles_id']) : ?>
+        <input type="submit" value="Opravit úkol" />
+    <?php else : ?>
+        <input type="submit" value="Vytvořit úkol" name="create" />
+    <?php endif ?>
+</div>
+
+
+  
+  <div class="col-md-8">
+
+
+    <textarea name="content"><?= $article['content'] ?></textarea>
+    
+    </div>
+</form>
+</div>
+</div>
+
+<script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea[name=content]",
+        height: 500,
+        width: 700,
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+        entities: "160,nbsp",
+        entity_encoding: "named",
+        entity_encoding: "raw"
+    });
+</script>

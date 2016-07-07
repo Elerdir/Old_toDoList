@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs-cz">
+<head>
+    <base href="/localhost" /> <!-- co to znamená? -->
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="public/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="public/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="public/css/datedit.css" type="text/css" media="screen" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="iso-8859-1" src="public/js/datedit.js"></script>
+    <title><?= $title ?></title>
+    <meta name="description" content="<?= $description ?>" />
+    <meta name="keywords" content="<?= $keywords ?>" />
+    
+
+</head>
+
+<body>
+<header>
+    <h1>toDoList</h1>
+</header>
+<?php foreach ($messages as $message) : ?>
+    <p class="message"><?= $message ?></p>
+<?php endforeach ?>
+<nav>
+    <ul>
+        <li><a href="article/uvod"><?php $_SESSION['user'] ?></a></li>
+       <!--Zatím to necháme takhle, páč je to otrávná a zdržující práce furt chodit přes admina-->
+            <li><a href="article">Úkoly</a></li>
+            <li><a href="wiki">Wiki</a></li>
+        <?php if ($admin) : ?>
+        <?php endif ?>
+        <!--<li><a href="article">Úkoly</a></li>-->
+        <li><a href="contact">Kontakt</a></li>
+        <li><a>Dnes je: <?php echo(DateUtils::formatDate(DateUtils::dbNow()))?></a></li>
+    </ul>
+</nav>
+<br clear="both" />
+
+<article>
+    <?php $this->controller->extractView(); ?>
+</article>
+
+<footer>
+    <!-- <p>Ukázkový tutoriál pro jednoduché MVC z programátorské sociální sítě
+     *   <a href="http://www.devbook.cz" target="_blank">devbook.cz</a>.</p>
+    -->
+    <a href="administration">Administrace</a>
+
+</footer>
+</body>
+</html>
